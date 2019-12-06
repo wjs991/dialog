@@ -32,7 +32,7 @@ public class dialog : MonoBehaviour
 
     public Text nameing;                                                //대화 지문 오브젝트에 있는 것을 표시할 오브젝트
     public Text DialogT;                                                //대화 지문 내용 오브젝트
-    public Button Next_b;                                               //다음 버튼
+    public Text Next_T;                                               //다음 버튼
     public GameObject dialog_obj;                                       //대화 지문 오브젝트
 
     IEnumerator seq_;
@@ -54,7 +54,7 @@ public class dialog : MonoBehaviour
     {
         nameing = dialog_obj.GetComponent<parameter>().name_text;   //다이얼로그 오브젝트에서 각 변수 받아오기
         DialogT = dialog_obj.GetComponent<parameter>().content;
-        Next_b = dialog_obj.GetComponent<parameter>().next_btn;
+        Next_T = dialog_obj.GetComponent<parameter>().next_text;
 
         running = true;
         foreach (dialog_info dialog_temp in dialog_cycles[index].info)  //대화 단위를 큐로 관리하기 위해 넣는다.
@@ -69,7 +69,7 @@ public class dialog : MonoBehaviour
             nameing.text = dialog_cycles[index].info[i].name;
 
             text_ = text_seq.Dequeue();                                  //대화 지문을 pop
-            Next_b.onClick.AddListener(() => { DisplayNext(index, i); });//다음으로 버튼에 함수 등록
+            
             seq_ = seq_sentence(index, i);                               //대화 지문 출력 코루틴
             StartCoroutine(seq_);                                        //코루틴 실행
 
@@ -88,7 +88,7 @@ public class dialog : MonoBehaviour
         }
 
 
-        Next_b.onClick.RemoveAllListeners();                            
+                                  
 
         dialog_cycles[index].check_cycle_read = true;                   //해당 대화 그룹 읽음
         running = false;
@@ -96,6 +96,9 @@ public class dialog : MonoBehaviour
 
     public void DisplayNext(int index, int number)                      //다음 지문으로 넘어가기
     {
+        Next_T.text = "";
+        Next_T.gameObject.SetActive(false);
+
         if (text_seq.Count == 0)                                        //다음 지문이 없다면
         {
             dialog_obj.gameObject.SetActive(false);                     //다이얼로그 끄기
@@ -115,7 +118,8 @@ public class dialog : MonoBehaviour
             DialogT.text += letter;                                     //한글자씩 출력
             yield return new WaitForSeconds(delay);                     //출력 딜레이
         }
-
+        Next_T.gameObject.SetActive(true);
+        Next_T.text = "next";
         StopCoroutine(skip_seq);                                        //지문 출력이 끝나면 터치 대기 코루틴 해제
         IEnumerator next = next_touch(index, number);                   //버튼 이외에 부분을 터치해도 넘어가는 코루틴 시작
         StartCoroutine(next);
@@ -127,6 +131,8 @@ public class dialog : MonoBehaviour
         yield return new WaitUntil(() => Input.GetMouseButton(0));
         StopCoroutine(seq);                                              //대화 지문 코루틴 해제
         DialogT.text = text_;                                            //스킵시 모든 지문 한번에 출력
+        Next_T.gameObject.SetActive(true);
+        Next_T.text = "next";
         IEnumerator next = next_touch(index, number);                    //대화 지문 코루틴 해제 됬기 때문에 다음 지문으로 가는 코루틴 시작
         StartCoroutine(next);                                                   
     }

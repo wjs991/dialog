@@ -7,5 +7,5 @@ public class parameter : MonoBehaviour
 {
     public Text name_text;
     public Text content;
-    public Button next_btn;
+    public Text next_text;
 }
