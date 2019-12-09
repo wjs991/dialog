@@ -897,6 +897,19 @@ MonoBehaviour:
       check_read: 0
     cycle_index: 0
     check_cycle_read: 0
+  - cycle_name: "\uD14C\uC2A4\uD2B8_2"
+    info:
+    - name: "\uD14C\uC2A4\uD2B8_2_1"
+      info: "2-1\uBC88\uC9F8 \uC9C0\uBB38"
+      check_read: 0
+    - name: "\uD14C\uC2A4\uD2B8_2_2"
+      info: "2-2\uBC88\uC9F8 \uC9C0\uBB38"
+      check_read: 0
+    - name: "\uD14C\uC2A4\uD2B8_3_3"
+      info: "2-3\uBC88\uC9F8 \uC9C0\uBB38"
+      check_read: 0
+    cycle_index: 0
+    check_cycle_read: 0
   name_: 
   text_: 
   nameing: {fileID: 0}
@@ -1072,7 +1085,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 100
   target: 90
+  target_2: 60
   time_text: {fileID: 2115700330}
+  test_1: 0
 --- !u!4 &2023161671
 Transform:
   m_ObjectHideFlags: 0

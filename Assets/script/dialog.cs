@@ -7,7 +7,7 @@ public class dialog_info
 {
     public string name;
     [TextArea(3, 5)]
-    public string info;
+    public string content;
     public bool check_read;
 }
 
@@ -59,7 +59,7 @@ public class dialog : MonoBehaviour
         running = true;
         foreach (dialog_info dialog_temp in dialog_cycles[index].info)  //대화 단위를 큐로 관리하기 위해 넣는다.
         {
-            text_seq.Enqueue(dialog_temp.info);
+            text_seq.Enqueue(dialog_temp.content);
         }
 
         dialog_obj.gameObject.SetActive(true);
