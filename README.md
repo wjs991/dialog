@@ -16,6 +16,8 @@
 
 ## 설치 방법
 > [릴리즈](https://github.com/wjs991/dialog/releases)
+1. 위 파일을 다운 받는다.
+2. 프로젝트 내에서 Asset -> Import Asset으로 import하여 
 
 ## 상세 설명
 
