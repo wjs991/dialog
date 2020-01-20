@@ -40,6 +40,8 @@ public class dialog : MonoBehaviour
 
     public float delay;
     public bool running = false;
+
+
     void Awake()    //싱글톤 패턴으로 어느 씬에서든 접근 가능하게 한다.
     {
         if (instance == null)
@@ -49,6 +51,14 @@ public class dialog : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void skip(int index)
+    {
+        StopAllCoroutines();
+        dialog_obj.SetActive(false);
+        dialog_cycles[index].check_cycle_read = true;
+        running = false;
     }
     public IEnumerator dialog_system_start(int index)//다이얼로그 출력 시작
     {
@@ -63,7 +73,7 @@ public class dialog : MonoBehaviour
         }
 
         dialog_obj.gameObject.SetActive(true);
-        for (int i = 0; i < dialog_cycles[index].info.Count; i++) //대화 단위를 순서대로 출력
+        for (int i = 0; i < dialog_cycles[index].info.Count; i++)       //대화 단위를 순서대로 출력
         {
 
             nameing.text = dialog_cycles[index].info[i].name;

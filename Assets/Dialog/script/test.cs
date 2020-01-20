@@ -10,6 +10,7 @@ public class test : MonoBehaviour
     public float target_2;
     public Text time_text;
     public bool test_1;
+    public int index;
     void Start()
     {
         if (test_1)
@@ -22,7 +23,11 @@ public class test : MonoBehaviour
         }
         
     }
-
+    
+    public void skip()
+    {
+        dialog.instance.skip(index);
+    }
 
     IEnumerator timer()
     {
@@ -38,6 +43,7 @@ public class test : MonoBehaviour
                 {
                     if (dialog.instance.dialog_read(0) && !dialog.instance.running)
                     {
+                        index = 0;
                         IEnumerator dialog_co = dialog.instance.dialog_system_start(0);
                         StartCoroutine(dialog_co);
                         
@@ -77,6 +83,7 @@ public class test : MonoBehaviour
                 {
                     if (dialog.instance.dialog_read(0) && !dialog.instance.running)
                     {
+                        index = 0;
                         IEnumerator dialog_co = dialog.instance.dialog_system_start(0);
                         StartCoroutine(dialog_co);
 
@@ -96,6 +103,7 @@ public class test : MonoBehaviour
                 {
                     if (dialog.instance.dialog_read(1) && !dialog.instance.running)
                     {
+                        index = 1;
                         IEnumerator dialog_co = dialog.instance.dialog_system_start(1);
                         StartCoroutine(dialog_co);
 
